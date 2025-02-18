@@ -1,15 +1,25 @@
 /// <reference types="cypress"/> 
+import produtosPage from "../../support/page-objects/produtos.page";
 
 describe('Funcionalidade: Produtos', () => {
 
     beforeEach(() => {
-        cy.visit('produtos/') //baseURL usado para o site ser fixo (cypress.config.js)
+        produtosPage.visitarUrl()
     });
 
     it('Deve selecionar um produto da lista', () => {
-        //cy.get('.product-block').first().click() primeiro elemento da lista
-        cy.get('.product-block').eq(3).click() //elemento especifico
-        //cy.get('.products > .row').contains(Aero Daily Fitness Tee).click() // procura o nome do produto
-        cy.get('#tab-title-description > a').should('contain', 'Descrição')
+        produtosPage.buscarProdutoLista('Abominable Hoodie')
+    });
+
+    it.only('Deve buscar um produto com sucesso', () => {
+        produtosPage.buscarProduto('Aero Daily Fitness Tee')
+    });
+    
+    it('Deve visitar a pagina do produto', () => {
+        
+    });
+
+    it('Deve adicionar o produto ao carrinho', () => {
+        
     });
 });
