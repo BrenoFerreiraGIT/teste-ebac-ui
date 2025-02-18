@@ -24,4 +24,21 @@ describe('Funcionalidade Cadastro', () => {
         cy.get('.woocommerce-Button').click()
         cy.get('.woocommerce-message').should('contain' , 'Detalhes da conta modificados com sucesso.')
     });
+
+    it('Deve completar o cadastro com sucesso - usando variaveis', () => {
+        var nome = faker.person.firstName()
+        var email = faker.internet.email(nome) // cria o email aleatorio com o nome já criado
+        var sobrenome = faker.person.lastName()
+
+        cy.get('#reg_email').type(email) // cria um email aleatorio
+        cy.get('#reg_password').type('picamole')
+        cy.get(':nth-child(4) > .button').click()
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('exist')
+        cy.get('.woocommerce-MyAccount-navigation-link--edit-account > a').click()
+        cy.get('#account_first_name').type(nome) // cria um primero nome aletorio 
+        cy.get('#account_last_name').type(sobrenome) // cria um sobrenome aleatorio
+        cy.wait(5000) // espera 5 segundos, nao é uma boa pratica manter no teste, apenas para entender
+        cy.get('.woocommerce-Button').click()
+        cy.get('.woocommerce-message').should('contain' , 'Detalhes da conta modificados com sucesso.')
+    });
 });
