@@ -3,7 +3,7 @@
 describe('Funcionalidade: Produtos', () => {
 
     beforeEach(() => {
-        cy.visit('http://lojaebac.ebaconline.art.br/produtos/')
+        cy.visit('produtos/') //baseURL usado para o site ser fixo (cypress.config.js)
     });
 
     it('Deve selecionar um produto da lista', () => {
