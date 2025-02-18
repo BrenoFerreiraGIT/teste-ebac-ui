@@ -35,12 +35,16 @@ describe('Funcionalidade: login', () => {
         cy.get('.woocommerce-form > .button').click() 
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, shaolin.matador.de.porco')
     });
-    it.only('Deve fazer login com sucesso - usando fixture', () => {
+    it('Deve fazer login com sucesso - usando fixture', () => {
         cy.fixture('perfil').then(dados => {
             cy.get('#username').type(dados.usuario) 
-            cy.get('#password').type(dados.senha, {log: false})
+            cy.get('#password').type(dados.senha, {log: false}) //log: false esconde a senha
             cy.get('.woocommerce-form > .button').click() 
             cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, shaolin.matador.de.porco')
         })
+    });
+    it.only('Deve fazer login com sucesso - usando comandos customizados', () => {
+        cy.login('shaolin.matador.de.porco@xvideos.com', 'teste123') //commands.js
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, shaolin.matador.de.porco')
     });
 })
